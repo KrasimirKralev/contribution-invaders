@@ -1,0 +1,37 @@
+name: Contribution Invaders
+description: Turn a GitHub contribution graph into a self-playing arcade game SVG (light and dark) for a profile README
+author: KrasimirKralev
+branding:
+  icon: crosshair
+  color: purple
+
+inputs:
+  github_user_name:
+    description: Whose contribution graph to draw (a GitHub login).
+    default: ${{ github.repository_owner }}
+  github_token:
+    description: Token for the GraphQL contributions query. The default sees public contributions; pass a PAT to include private ones.
+    default: ${{ github.token }}
+  outputs:
+    description: |
+      SVG files to write, one per line, relative to the workspace. Add "?palette=dark" for the dark theme
+      (the default is light).
+    default: |
+      dist/invaders.svg
+      dist/invaders-dark.svg?palette=dark
+  title:
+    description: Header text, drawn in the pixel font. Empty means "@<login>".
+    default: ''
+  seed:
+    description: |
+      Which misses, bombs and stars the game uses: "daily" (new every day), "fixed" (the same every day)
+      or a whole number.
+    default: daily
+
+outputs:
+  files:
+    description: The SVG files written, one per line.
+
+runs:
+  using: node24
+  main: dist/index.js

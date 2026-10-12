@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run typecheck
+
+      - run: npm test
+
+      - name: Check that dist/ and the README demo match the source
+        run: |
+          npm run build
+          npm run demo
+          if ! git diff --exit-code -- dist/ docs/; then
+            echo "::error::dist/ or docs/ is stale: run 'npm run build && npm run demo' and commit the result."
+            exit 1
+          fi
+
+      - name: Size report
+        run: npm run size

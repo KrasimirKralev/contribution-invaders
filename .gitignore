@@ -1,0 +1,7 @@
+node_modules/
+*.log
+.test-output/
+
+# Rendered by the action and the self-run; they live on the `output` branch.
+/output/
+/dist/*.svg

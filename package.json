@@ -1,0 +1,43 @@
+{
+  "name": "contribution-invaders",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A GitHub Action that turns a contribution graph into a self-playing arcade game SVG for a profile README",
+  "license": "MIT",
+  "author": "Krasimir Kralev (https://github.com/KrasimirKralev)",
+  "homepage": "https://github.com/KrasimirKralev/contribution-invaders#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrasimirKralev/contribution-invaders.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KrasimirKralev/contribution-invaders/issues"
+  },
+  "keywords": [
+    "github-action",
+    "github-profile-readme",
+    "contribution-graph",
+    "svg-animation",
+    "pixel-art",
+    "arcade"
+  ],
+  "scripts": {
+    "build": "esbuild src/action.ts --bundle --platform=node --target=node20 --format=esm --legal-comments=none --outfile=dist/index.js",
+    "demo": "tsx scripts/demo.ts",
+    "size": "tsx scripts/size-report.ts",
+    "fixtures": "tsx scripts/make-fixtures.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.20",
+    "esbuild": "0.28.0",
+    "tsx": "4.22.4",
+    "typescript": "5.9.3",
+    "vitest": "2.1.9"
+  }
+}
